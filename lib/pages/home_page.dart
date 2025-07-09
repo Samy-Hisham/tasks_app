@@ -1,26 +1,33 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:tasks_app/models/task_manager.dart';
 import 'package:tasks_app/models/tasks_model.dart';
 import 'package:tasks_app/widget/add_task_section.dart';
 import 'package:tasks_app/widget/empty_list.dart';
 import 'package:tasks_app/widget/tasks_list.dart';
 
-class AddTask extends StatefulWidget {
-  AddTask({super.key});
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
 
   @override
-  State<AddTask> createState() => _AddTaskState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _AddTaskState extends State<AddTask> {
+class _HomePageState extends State<HomePage> {
   final TextEditingController titleController = TextEditingController();
+  //controller remove
 
   String title = '';
 
-  final TaskManager _taskManager = TaskManager();
-
+  late TaskManager _taskManager;
+  @override
+  void initState() {
+    super.initState();
+    final box = Hive.box<TasksModel>('tasks');
+    _taskManager = TaskManager(box);
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

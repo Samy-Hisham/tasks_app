@@ -6,7 +6,23 @@ class EmptyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('No tasks yet.'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.task_alt,
+            size: 200,
+            color: Colors.grey,
+          ),
+          Text(
+            'No tasks yet.',
+            style: TextStyle(
+              fontSize: 24,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
